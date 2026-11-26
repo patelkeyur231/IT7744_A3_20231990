@@ -4,6 +4,15 @@
     {{-- Title --}}
     <h2 class="font-bold text-xl">{{ $post->title }}</h2>
 
+    {{-- featured photo --}}
+    <div class="h-52 rounded-md mb-4 w-full object-cover overflow-hidden">
+        @if ($post->image)
+            <img src="{{ asset('storage/' . $post->image) }}" alt="">
+        @else
+            <img src="{{ asset('storage/post_images/default.jpg') }}" alt="">
+        @endif
+    </div>
+
     {{-- Author and date --}}
     <div class="text-xs font-light mb-4">
         <span>Posted {{ $post->created_at->diffForHumans() }} by</span>

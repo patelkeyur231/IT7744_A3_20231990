@@ -1,2 +1,5 @@
 *
 !.gitignore
+!post_images/
+post_images/*
+!post_images/default.jpg
