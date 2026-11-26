@@ -1,0 +1,36 @@
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../**/*.blade.php';
+@source '../**/*.js';
+
+@theme {
+    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+        'Segoe UI Symbol', 'Noto Color Emoji';
+}
+
+/* Reusable classes used in the Blade views */
+@layer components {
+    .nav-link {
+        @apply text-white hover:bg-slate-700 px-3 py-2 rounded-md;
+    }
+    .round-btn {
+        @apply w-9 h-9 rounded-full overflow-hidden cursor-pointer border-2 border-slate-500;
+    }
+    .title {
+        @apply text-2xl font-bold mb-4;
+    }
+    .card {
+        @apply bg-white p-6 rounded-lg shadow-md;
+    }
+    .input {
+        @apply w-full px-3 py-2 border border-slate-300 rounded-md mt-1 outline-none focus:ring-2 focus:ring-slate-400;
+    }
+    .btn {
+        @apply w-full bg-slate-800 text-white py-2 rounded-md hover:bg-slate-700 cursor-pointer;
+    }
+    .error {
+        @apply text-red-500 text-xs mt-1;
+    }
+}
