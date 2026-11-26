@@ -8,36 +8,36 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
-    // Register user
+    // Register User
     public function register(Request $request)
     {
-        // Validate
+        // validate
         $fields = $request->validate([
             'username' => ['required', 'max:255', 'unique:users'],
             'email' => ['required', 'max:255', 'email', 'unique:users'],
             'password' => ['required', 'min:3', 'confirmed'],
         ]);
 
-        // Register (password is hashed automatically by the 'hashed' cast in User.php)
+        // register
         $user = User::create($fields);
 
-        // Login
+        // login
         Auth::login($user);
 
-        // Redirect
+        // redirect
         return redirect()->route('dashboard');
     }
 
-    // Login user
+    // Login User
     public function login(Request $request)
     {
-        // Validate
+        // validate
         $fields = $request->validate([
             'email' => ['required', 'max:255', 'email'],
             'password' => ['required'],
         ]);
 
-        // Try to login the user
+        // try to login the user
         if (Auth::attempt($fields, $request->remember)) {
             return redirect()->intended('dashboard');
         } else {
@@ -47,19 +47,19 @@ class AuthController extends Controller
         }
     }
 
-    // Logout user
+    // Logout User
     public function logout(Request $request)
     {
-        // Logout the user
+        // logout the user
         Auth::logout();
 
-        // Invalidate the user's session
+        // invalidate user's session
         $request->session()->invalidate();
 
-        // Regenerate CSRF token
+        // regenerate CSRF token
         $request->session()->regenerateToken();
 
-        // Redirect to home
+        // redirect to home
         return redirect('/');
     }
 }

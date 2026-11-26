@@ -8,7 +8,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 class PostResource extends JsonResource
 {
     /**
-     * Shape of one post in the JSON response.
+     * Transform the resource into an array.
      */
     public function toArray(Request $request): array
     {

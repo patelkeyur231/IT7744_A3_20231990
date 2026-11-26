@@ -4,12 +4,22 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
-class PostController extends Controller
+class PostController extends Controller implements HasMiddleware
 {
+    public static function middleware(): array
+    {
+        return [
+            new Middleware('auth', except: ['index', 'show']),
+        ];
+    }
+
     /**
-     * Display a listing of the resource (homepage: all posts).
+     * Display a listing of the resource.
      */
     public function index()
     {
@@ -20,7 +30,6 @@ class PostController extends Controller
 
     /**
      * Show the form for creating a new resource.
-     * (The create form lives on the dashboard, so this just sends the user there.)
      */
     public function create()
     {
@@ -32,16 +41,16 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        // Validate
+        // validate
         $fields = $request->validate([
             'title' => ['required', 'max:255'],
             'body' => ['required'],
         ]);
 
-        // Create a post through the logged-in user (sets user_id automatically)
+        // create a post
         Auth::user()->posts()->create($fields);
 
-        // Redirect back to dashboard with a flash message
+        // redirect back to dashboard
         return back()->with('success', 'Your post was created.');
     }
 
@@ -58,7 +67,10 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        //
+        // Authorizing the action
+        Gate::authorize('modify', $post);
+
+        return view('posts.edit', ['post' => $post]);
     }
 
     /**
@@ -66,7 +78,20 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        //
+        // Authorizing the action
+        Gate::authorize('modify', $post);
+
+        // validate
+        $fields = $request->validate([
+            'title' => ['required', 'max:255'],
+            'body' => ['required'],
+        ]);
+
+        // update the post
+        $post->update($fields);
+
+        // redirect to dashboard
+        return redirect()->route('dashboard')->with('success', 'Your post was updated.');
     }
 
     /**
@@ -74,6 +99,13 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+        // Authorizing the action
+        Gate::authorize('modify', $post);
+
+        // delete the post
+        $post->delete();
+
+        // redirect back to dashboard
+        return back()->with('delete', 'Your post was deleted.');
     }
 }

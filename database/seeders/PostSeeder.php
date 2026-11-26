@@ -9,7 +9,7 @@ use Illuminate\Database\Seeder;
 class PostSeeder extends Seeder
 {
     /**
-     * Create 20 dummy posts spread across the existing users.
+     * Run the database seeds.
      */
     public function run(): void
     {

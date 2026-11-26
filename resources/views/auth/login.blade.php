@@ -30,7 +30,7 @@
                 <label for="remember">Remember me</label>
             </div>
 
-            {{-- Failed login message --}}
+            {{-- failed login --}}
             @error('failed')
                 <p class="error mb-4">{{ $message }}</p>
             @enderror

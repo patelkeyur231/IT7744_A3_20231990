@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
-    // Dashboard: show the logged-in user's latest posts
     public function index()
     {
         $posts = Auth::user()->posts()->latest()->paginate(6);
@@ -16,7 +15,6 @@ class DashboardController extends Controller
         return view('users.dashboard', ['posts' => $posts]);
     }
 
-    // All posts written by one user (clicking an author's name)
     public function userPosts(User $user)
     {
         $userPosts = $user->posts()->latest()->paginate(6);
