@@ -11,7 +11,10 @@
 <body class="bg-slate-100 text-slate-900">
     <header class="bg-slate-800 shadow-lg">
         <nav class="max-w-screen-lg mx-auto flex items-center justify-between px-4 py-3">
-            <a href="{{ route('home') }}" class="nav-link">Home</a>
+            <div class="flex items-center gap-2">
+                <a href="{{ route('home') }}" class="nav-link">Home</a>
+                <a href="{{ route('gallery') }}" class="nav-link">Gallery</a>
+            </div>
 
             @auth
                 <div class="relative grid place-items-center" x-data="{ open: false }">

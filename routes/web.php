@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\AdminPostController;
 use App\Http\Controllers\Admin\AdminUserController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Middleware\AdminMiddleware;
@@ -13,6 +14,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [PostController::class, 'index'])->name('home');
 
 Route::resource('posts', PostController::class);
+
+Route::get('/gallery', [GalleryController::class, 'index'])->name('gallery');
 
 // auth routes
 Route::middleware('auth')->group(function () {

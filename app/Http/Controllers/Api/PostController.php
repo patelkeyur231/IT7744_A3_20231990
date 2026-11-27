@@ -21,7 +21,7 @@ class PostController extends Controller
             $posts->where('filter', $request->filter);
         }
 
-        return PostResource::collection($posts->paginate(6));
+        return PostResource::collection($posts->paginate(6)->withQueryString());
     }
 
     public function show(Post $post)
