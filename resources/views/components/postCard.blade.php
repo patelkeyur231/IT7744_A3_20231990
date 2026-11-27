@@ -7,9 +7,9 @@
     {{-- featured photo --}}
     <div class="h-52 rounded-md mb-4 w-full object-cover overflow-hidden">
         @if ($post->image)
-            <img src="{{ asset('storage/' . $post->image) }}" alt="">
+            <img src="{{ asset('storage/' . $post->image) }}" alt="{{ $post->title }}" class="filter-{{ $post->filter }}">
         @else
-            <img src="{{ asset('storage/post_images/default.jpg') }}" alt="">
+            <img src="{{ asset('storage/post_images/default.jpg') }}" alt="{{ $post->title }}">
         @endif
     </div>
 

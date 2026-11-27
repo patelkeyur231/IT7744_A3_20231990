@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Post;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -21,6 +22,7 @@ class PostFactory extends Factory
             'user_id' => User::factory(),
             'title' => fake()->sentence(6),
             'body' => fake()->paragraphs(4, true),
+            'filter' => fake()->randomElement(Post::FILTERS),
         ];
     }
 }

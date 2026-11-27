@@ -24,6 +24,9 @@ class AuthController extends Controller
         // login
         Auth::login($user);
 
+        // api token for the javascript app
+        session(['api_token' => $user->createToken('web')->plainTextToken]);
+
         // redirect
         return redirect()->route('dashboard');
     }
@@ -49,6 +52,8 @@ class AuthController extends Controller
 
         // try to login the user
         if (Auth::attempt($credentials, $request->remember)) {
+            session(['api_token' => Auth::user()->createToken('web')->plainTextToken]);
+
             return redirect()->intended('dashboard');
         } else {
             return back()->withErrors([
@@ -60,6 +65,9 @@ class AuthController extends Controller
     // Logout User
     public function logout(Request $request)
     {
+        // delete api tokens
+        $request->user()->tokens()->delete();
+
         // logout the user
         Auth::logout();
 

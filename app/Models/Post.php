@@ -15,7 +15,10 @@ class Post extends Model
         'title',
         'body',
         'image',
+        'filter',
     ];
+
+    public const FILTERS = ['none', 'grayscale', 'sepia', 'warm', 'cool', 'vivid'];
 
     public function user(): BelongsTo
     {

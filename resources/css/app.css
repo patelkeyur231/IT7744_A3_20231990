@@ -33,3 +33,24 @@
         @apply text-red-500 text-xs mt-1;
     }
 }
+
+.filter-grayscale {
+    filter: grayscale(100%);
+}
+
+.filter-sepia {
+    filter: sepia(90%);
+}
+
+.filter-warm {
+    filter: sepia(30%) saturate(140%) hue-rotate(-10deg);
+}
+
+.filter-cool {
+    filter: saturate(110%) hue-rotate(20deg) brightness(105%);
+}
+
+.filter-vivid {
+    filter: saturate(180%) contrast(110%);
+}
+
