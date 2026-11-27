@@ -6,7 +6,6 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{{ env('APP_NAME') }}</title>
     @vite(['resources/css/app.css', 'resources/sass/app.scss', 'resources/js/app.js'])
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.9/dist/cdn.min.js"></script>
 </head>
 <body class="bg-slate-100 text-slate-900">
     <header class="bg-slate-800 shadow-lg">
