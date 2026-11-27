@@ -8,7 +8,7 @@
 
         <div class="mb-4">
             <label for="username">Username</label>
-            <input name="username" class="input" value="{{ old('username') }}">
+            <input name="username" id="username" type="text" required maxlength="255" autocomplete="username" class="input" value="{{ old('username') }}">
             @error('username')
                 <p class="error">{{ $message }}</p>
             @enderror
@@ -16,7 +16,7 @@
 
         <div class="mb-4">
             <label for="email">Email</label>
-            <input name="email" type="email" class="input" value="{{ old('email') }}">
+            <input name="email" id="email" required maxlength="255" autocomplete="email" type="email" class="input" value="{{ old('email') }}">
             @error('email')
                 <p class="error">{{ $message }}</p>
             @enderror
@@ -24,7 +24,7 @@
 
         <div class="mb-4">
             <label for="password">Password</label>
-            <input name="password" type="password" class="input">
+            <input name="password" id="password" required minlength="3" autocomplete="new-password" type="password" class="input">
             @error('password')
                 <p class="error">{{ $message }}</p>
             @enderror
@@ -32,12 +32,12 @@
 
         <div class="mb-4">
             <label for="password_confirmation">Confirm Password</label>
-            <input name="password_confirmation" type="password" class="input">
+            <input name="password_confirmation" id="password_confirmation" autocomplete="new-password" type="password" class="input">
         </div>
 
         <div class="mb-4">
             <label for="role">Role</label>
-            <select name="role" class="input">
+            <select name="role" id="role" class="input">
                 <option value="user">User</option>
                 <option value="admin">Admin</option>
             </select>
@@ -46,12 +46,12 @@
         {{-- Avatar upload --}}
         <div class="mb-4">
             <label for="avatar" class="block mb-1 font-semibold text-gray-700">Avatar</label>
-            <input type="file" name="avatar" class="w-full border border-gray-300 rounded px-3 py-2">
+            <input type="file" name="avatar" id="avatar" accept="image/*" class="w-full border border-gray-300 rounded px-3 py-2">
             @error('avatar')
                 <p class="error">{{ $message }}</p>
             @enderror
         </div>
 
-        <button class="btn">Create User</button>
+        <button type="submit" class="btn">Create User</button>
     </form>
 </x-layout>

@@ -1,0 +1,28 @@
+@use '../abstracts/variables' as *;
+
+.gallery-card {
+    transition: transform $transition, box-shadow $transition;
+
+    &:hover {
+        transform: translateY(-3px);
+        box-shadow: $shadow-hover;
+    }
+
+    img {
+        transition: transform $transition;
+    }
+
+    &:hover img {
+        transform: scale(1.03);
+    }
+}
+
+#upload-progress {
+    height: 0.5rem;
+    border-radius: $radius;
+    accent-color: $color-dark;
+}
+
+#preview-image {
+    border: 1px solid $color-light;
+}

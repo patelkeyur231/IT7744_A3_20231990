@@ -8,7 +8,7 @@
             {{-- Username --}}
             <div class="mb-4">
                 <label for="username">Username</label>
-                <input type="text" name="username" value="{{ old('username') }}"
+                <input type="text" name="username" id="username" required maxlength="255" autocomplete="username" value="{{ old('username') }}"
                     class="input @error('username') ring-red-500 @enderror">
                 @error('username')
                     <p class="error">{{ $message }}</p>
@@ -18,7 +18,7 @@
             {{-- Email --}}
             <div class="mb-4">
                 <label for="email">Email</label>
-                <input type="text" name="email" value="{{ old('email') }}"
+                <input type="email" name="email" id="email" required maxlength="255" autocomplete="email" value="{{ old('email') }}"
                     class="input @error('email') ring-red-500 @enderror">
                 @error('email')
                     <p class="error">{{ $message }}</p>
@@ -28,7 +28,7 @@
             {{-- Password --}}
             <div class="mb-4">
                 <label for="password">Password</label>
-                <input type="password" name="password" class="input @error('password') ring-red-500 @enderror">
+                <input type="password" name="password" id="password" required minlength="3" autocomplete="new-password" class="input @error('password') ring-red-500 @enderror">
                 @error('password')
                     <p class="error">{{ $message }}</p>
                 @enderror
@@ -37,12 +37,12 @@
             {{-- Confirm Password --}}
             <div class="mb-8">
                 <label for="password_confirmation">Confirm Password</label>
-                <input type="password" name="password_confirmation"
+                <input type="password" name="password_confirmation" id="password_confirmation" autocomplete="new-password"
                     class="input @error('password') ring-red-500 @enderror">
             </div>
 
             {{-- Submit button --}}
-            <button class="btn">Register</button>
+            <button type="submit" class="btn">Register</button>
         </form>
     </div>
 </x-layout>

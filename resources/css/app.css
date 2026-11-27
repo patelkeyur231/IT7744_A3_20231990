@@ -29,34 +29,7 @@
     .btn {
         @apply w-full bg-slate-800 text-white py-2 rounded-md hover:bg-slate-700 cursor-pointer;
     }
-    .tab {
-        @apply px-4 py-2 rounded-md bg-white text-slate-700 shadow-sm cursor-pointer hover:bg-slate-200 disabled:opacity-50 disabled:cursor-not-allowed;
-    }
-    .tab-active {
-        @apply bg-slate-800 text-white hover:bg-slate-700;
-    }
     .error {
         @apply text-red-500 text-xs mt-1;
     }
 }
-
-.filter-grayscale {
-    filter: grayscale(100%);
-}
-
-.filter-sepia {
-    filter: sepia(90%);
-}
-
-.filter-warm {
-    filter: sepia(30%) saturate(140%) hue-rotate(-10deg);
-}
-
-.filter-cool {
-    filter: saturate(110%) hue-rotate(20deg) brightness(105%);
-}
-
-.filter-vivid {
-    filter: saturate(180%) contrast(110%);
-}
-

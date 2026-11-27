@@ -1,0 +1,14 @@
+// photo filters chosen when publishing an image
+$filters: (
+    'grayscale': grayscale(100%),
+    'sepia': sepia(90%),
+    'warm': sepia(30%) saturate(140%) hue-rotate(-10deg),
+    'cool': saturate(110%) hue-rotate(20deg) brightness(105%),
+    'vivid': saturate(180%) contrast(110%),
+);
+
+@each $name, $value in $filters {
+    .filter-#{$name} {
+        filter: $value;
+    }
+}

@@ -11,7 +11,7 @@
 
             <div class="mb-4">
                 <label for="username">Username</label>
-                <input type="text" name="username" value="{{ old('username', $user->username) }}"
+                <input type="text" name="username" id="username" required maxlength="255" autocomplete="username" value="{{ old('username', $user->username) }}"
                     class="input @error('username') ring-red-500 @enderror">
                 @error('username')
                     <p class="error">{{ $message }}</p>
@@ -20,7 +20,7 @@
 
             <div class="mb-4">
                 <label for="email">Email</label>
-                <input type="text" name="email" value="{{ old('email', $user->email) }}"
+                <input type="email" name="email" id="email" required maxlength="255" autocomplete="email" value="{{ old('email', $user->email) }}"
                     class="input @error('email') ring-red-500 @enderror">
                 @error('email')
                     <p class="error">{{ $message }}</p>
@@ -29,7 +29,7 @@
 
             <div class="mb-4">
                 <label for="password">New Password</label>
-                <input type="password" name="password" class="input @error('password') ring-red-500 @enderror">
+                <input type="password" name="password" id="password" minlength="3" autocomplete="new-password" class="input @error('password') ring-red-500 @enderror">
                 @error('password')
                     <p class="error">{{ $message }}</p>
                 @enderror
@@ -37,12 +37,12 @@
 
             <div class="mb-4">
                 <label for="password_confirmation">Confirm Password</label>
-                <input type="password" name="password_confirmation" class="input">
+                <input type="password" name="password_confirmation" id="password_confirmation" autocomplete="new-password" class="input">
             </div>
 
             <div class="mb-6">
                 <label for="avatar">Profile Image</label>
-                <input type="file" name="avatar" class="input">
+                <input type="file" name="avatar" id="avatar" accept="image/*" class="input">
                 @error('avatar')
                     <p class="error">{{ $message }}</p>
                 @enderror
@@ -51,7 +51,7 @@
                 @endif
             </div>
 
-            <button class="btn">Update Profile</button>
+            <button type="submit" class="btn">Update Profile</button>
         </form>
     </div>
 </x-layout>

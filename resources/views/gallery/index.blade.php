@@ -47,7 +47,7 @@
 
                 {{-- live preview with the chosen filter --}}
                 <figure id="preview" class="mb-4" hidden>
-                    <img id="preview-image" src="" alt="Preview of the selected image" class="h-48 rounded-md object-cover">
+                    <img id="preview-image" src="{{ asset('storage/post_images/default.jpg') }}" alt="Preview of the selected image" class="h-48 rounded-md object-cover">
                     <figcaption class="text-xs text-slate-500 mt-1">Preview with filter</figcaption>
                 </figure>
 

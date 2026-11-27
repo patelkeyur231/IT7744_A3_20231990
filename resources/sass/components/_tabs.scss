@@ -1,0 +1,29 @@
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+.tab {
+    padding: 0.5rem 1rem;
+    border: 0;
+    border-radius: $radius;
+    background: $color-white;
+    color: $color-text;
+    box-shadow: $shadow-small;
+    cursor: pointer;
+    transition: background $transition, color $transition;
+
+    &:hover {
+        background: $color-light;
+    }
+
+    @include focus-ring;
+    @include disabled-state;
+
+    &.tab-active {
+        background: $color-dark;
+        color: $color-white;
+
+        &:hover {
+            background: $color-dark-hover;
+        }
+    }
+}

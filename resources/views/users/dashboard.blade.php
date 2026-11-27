@@ -18,7 +18,7 @@
             {{-- Post Title --}}
             <div class="mb-4">
                 <label for="title">Post Title</label>
-                <input type="text" name="title" value="{{ old('title') }}"
+                <input type="text" name="title" id="title" required maxlength="255" value="{{ old('title') }}"
                     class="input @error('title') ring-red-500 @enderror">
                 @error('title')
                     <p class="error">{{ $message }}</p>
@@ -28,7 +28,7 @@
             {{-- Post Body --}}
             <div class="mb-4">
                 <label for="body">Post Content</label>
-                <textarea name="body" rows="5" class="input @error('body') ring-red-500 @enderror">{{ old('body') }}</textarea>
+                <textarea name="body" id="body" required rows="5" class="input @error('body') ring-red-500 @enderror">{{ old('body') }}</textarea>
                 @error('body')
                     <p class="error">{{ $message }}</p>
                 @enderror
@@ -37,7 +37,7 @@
             {{-- post image --}}
             <div class="mb-4">
                 <label for="image">Featured image</label>
-                <input type="file" name="image" id="image"
+                <input type="file" name="image" accept=".png,.jpg,.jpeg,.webp" id="image"
                     class="file:mr-4 file:py-2 file:px-4 file:text-sm file:font-semibold file:bg-gray-200 hover:file:bg-blue-100">
                 @error('image')
                     <p class="error">{{ $message }}</p>
@@ -45,7 +45,7 @@
             </div>
 
             {{-- Submit button --}}
-            <button class="btn">Create</button>
+            <button type="submit" class="btn">Create</button>
         </form>
     </div>
 
@@ -63,7 +63,7 @@
                 <form action="{{ route('posts.destroy', $post) }}" method="post">
                     @csrf
                     @method('DELETE')
-                    <button class="bg-red-500 text-white px-2 py-1 text-xs rounded-md cursor-pointer">Delete</button>
+                    <button type="submit" class="bg-red-500 text-white px-2 py-1 text-xs rounded-md cursor-pointer">Delete</button>
                 </form>
             </x-postCard>
         @endforeach

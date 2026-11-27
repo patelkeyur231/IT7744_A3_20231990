@@ -8,7 +8,7 @@
             {{-- Email or Username --}}
             <div class="mb-4">
                 <label for="email">Email or Username</label>
-                <input type="text" name="email" value="{{ old('email') }}"
+                <input type="text" name="email" id="email" required maxlength="255" autocomplete="username" value="{{ old('email') }}"
                     class="input @error('email') ring-red-500 @enderror">
                 @error('email')
                     <p class="error">{{ $message }}</p>
@@ -18,7 +18,7 @@
             {{-- Password --}}
             <div class="mb-4">
                 <label for="password">Password</label>
-                <input type="password" name="password" class="input @error('password') ring-red-500 @enderror">
+                <input type="password" name="password" id="password" required autocomplete="current-password" class="input @error('password') ring-red-500 @enderror">
                 @error('password')
                     <p class="error">{{ $message }}</p>
                 @enderror
@@ -36,7 +36,7 @@
             @enderror
 
             {{-- Submit button --}}
-            <button class="btn">Login</button>
+            <button type="submit" class="btn">Login</button>
         </form>
     </div>
 </x-layout>

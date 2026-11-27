@@ -1,0 +1,16 @@
+@use 'variables' as *;
+
+// keyboard focus outline used on buttons and tabs
+@mixin focus-ring {
+    &:focus-visible {
+        outline: 2px solid $color-dark-hover;
+        outline-offset: 2px;
+    }
+}
+
+@mixin disabled-state {
+    &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+}

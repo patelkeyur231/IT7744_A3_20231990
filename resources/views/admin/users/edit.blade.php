@@ -10,7 +10,7 @@
 
             <div class="mb-5">
                 <label for="username" class="block mb-1 font-semibold text-gray-700">Username</label>
-                <input type="text" id="username" name="username" value="{{ old('username', $user->username) }}"
+                <input type="text" id="username" name="username" required maxlength="255" autocomplete="username" value="{{ old('username', $user->username) }}"
                     class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400">
                 @error('username')
                     <p class="error">{{ $message }}</p>
@@ -19,7 +19,7 @@
 
             <div class="mb-5">
                 <label for="email" class="block mb-1 font-semibold text-gray-700">Email</label>
-                <input type="email" id="email" name="email" value="{{ old('email', $user->email) }}"
+                <input type="email" id="email" name="email" required maxlength="255" autocomplete="email" value="{{ old('email', $user->email) }}"
                     class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400">
                 @error('email')
                     <p class="error">{{ $message }}</p>
@@ -38,7 +38,7 @@
             {{-- Avatar upload --}}
             <div class="mb-5">
                 <label for="avatar" class="block mb-1 font-semibold text-gray-700">Avatar</label>
-                <input type="file" name="avatar" class="w-full border border-gray-300 rounded px-3 py-2">
+                <input type="file" name="avatar" id="avatar" accept="image/*" class="w-full border border-gray-300 rounded px-3 py-2">
                 @error('avatar')
                     <p class="error">{{ $message }}</p>
                 @enderror

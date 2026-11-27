@@ -55,12 +55,6 @@ class PostController extends Controller
 
     public function store(Request $request)
     {
-        // clean the text before validating
-        $request->merge([
-            'title' => trim(strip_tags($request->title)),
-            'body' => trim(strip_tags($request->body)),
-        ]);
-
         // validate
         $request->validate([
             'title' => ['required', 'max:255'],
@@ -100,12 +94,6 @@ class PostController extends Controller
     {
         // Authorizing the action
         Gate::forUser($request->user())->authorize('modify', $post);
-
-        // clean the text before validating
-        $request->merge([
-            'title' => trim(strip_tags($request->title)),
-            'body' => trim(strip_tags($request->body)),
-        ]);
 
         // validate
         $request->validate([

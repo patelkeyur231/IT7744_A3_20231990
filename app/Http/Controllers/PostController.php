@@ -49,6 +49,16 @@ class PostController extends Controller implements HasMiddleware
             'image' => ['nullable', 'file', 'max:3000', 'mimes:png,jpg,webp'],
         ]);
 
+        // stop the same post being sent twice
+        $duplicate = Auth::user()->posts()
+            ->where('title', $request->title)
+            ->where('created_at', '>=', now()->subMinute())
+            ->exists();
+
+        if ($duplicate) {
+            return back()->withErrors(['title' => 'You already posted this a moment ago.'])->withInput();
+        }
+
         // store image if exists
         $path = null;
         if ($request->hasFile('image')) {

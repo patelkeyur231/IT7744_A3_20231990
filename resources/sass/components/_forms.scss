@@ -1,0 +1,16 @@
+@use '../abstracts/variables' as *;
+
+// fields marked invalid by the javascript or by laravel
+.input {
+    &[aria-invalid='true'],
+    &.ring-red-500 {
+        border-color: $color-error;
+        box-shadow: 0 0 0 1px $color-error;
+    }
+}
+
+// submit buttons are disabled while a form is being sent
+button[type='submit']:disabled {
+    opacity: 0.6;
+    cursor: wait;
+}
