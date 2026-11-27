@@ -1,59 +1,151 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# IT7744 Assessment 3 – CMS Web Application
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+**Keyur Patel – Student ID 20231990**
 
-## About Laravel
+A Laravel 12 content management web application with a secure admin section, user accounts, an image publishing section and a RESTful API that returns JSON. A client-side JavaScript gallery uses the API to show, publish, edit and delete images with XHR requests that carry a Sanctum `Authorization: Bearer` token.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+GitHub: https://github.com/patelkeyur231/IT7744_A3_20231990
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+---
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Login details
 
-## Learning Laravel
+| Role | Username | Email | Password |
+|---|---|---|---|
+| Administrator | `admin` | admin@example.com | `admin` |
+| Normal user | `testuser` | test@example.com | `password` |
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+You can log in with either the username or the email address.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+---
 
-## Laravel Sponsors
+## Requirements
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+- XAMPP with PHP 8.2 or newer and MySQL / MariaDB
+- Composer
+- Node.js 20 or newer and npm
 
-### Premium Partners
+## Installation
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+1. Start **Apache** and **MySQL** in the XAMPP Control Panel.
+2. Copy the `my_app` folder to `C:\xampp\htdocs\my_app` and open a terminal there.
+3. Install the PHP and JavaScript packages:
 
-## Contributing
+   ```bash
+   composer install
+   npm install
+   ```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+4. Create the environment file and app key:
 
-## Code of Conduct
+   ```bash
+   copy .env.example .env
+   php artisan key:generate
+   ```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+   The database settings in `.env` are already set for XAMPP (`my_app`, user `root`, no password).
 
-## Security Vulnerabilities
+5. Set up the database – **either**:
+   - import `database.sql` in phpMyAdmin (it creates the `my_app` database), **or**
+   - run `php artisan migrate:fresh --seed` to build it from the migrations and seeders.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+6. Link the storage folder so uploaded images can be shown:
 
-## License
+   ```bash
+   php artisan storage:link
+   ```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+7. Start the app in two terminals:
+
+   ```bash
+   php artisan serve
+   npm run dev
+   ```
+
+8. Open http://127.0.0.1:8000
+
+---
+
+## Features
+
+### Users
+- Register and log in (username or email), with "Remember me" and clear error messages
+- Edit profile: username, email, password and avatar image
+- Dashboard: create, update and delete your own posts with a featured image
+
+### Admin section (admins only)
+- `AdminMiddleware` blocks everyone except users with the `admin` role (403 for others)
+- **Manage Users**: list, create (with avatar), edit role and details, delete
+- **Manage Posts**: list, edit (title, content, image, author), delete
+
+### Publishing section – JavaScript gallery (`/gallery`)
+- Tabs for **Latest images** (with a filter dropdown and "Load more"), **My images** and **Other users**
+- Upload form with **title, description, filter and image file**, live filter preview and progress bar
+- Sent to the API with **XMLHttpRequest** and an `Authorization: Bearer` token for the logged in user
+- Edit and delete your own images
+- Login state is checked against `/api/user` and kept in one `state` object (and `sessionStorage`)
+
+### Security
+- **CSRF**: every Blade form uses `@csrf`; the API uses bearer tokens instead of cookies
+- **Authorisation**: `PostPolicy` (owner or admin), `Gate::authorize('modify', $post)`, `auth` and `guest` middleware
+- **Client-side validation**: HTML attributes (`required`, `maxlength`, `type="email"`, `accept`) and JavaScript checks before any request is sent
+- **Server-side validation**: `$request->validate()` in every controller
+- **Sanitising**: `SanitizeInput` middleware strips HTML tags from every text field (not passwords); the JavaScript also strips tags before sending; cards are built with `textContent`
+- **Duplicate submissions**: submit buttons are disabled after one click, and the same post title cannot be posted twice within a minute
+
+---
+
+## REST API
+
+All responses are JSON. Routes marked **token** need `Authorization: Bearer <token>`.
+
+| Method | URL | Access | Description |
+|---|---|---|---|
+| POST | `/api/login` | public | Get a token (`email` = email or username, `password`) |
+| GET | `/api/posts?filter=sepia` | public | Latest images, 6 per page, optional filter |
+| GET | `/api/posts/{id}` | public | One image |
+| GET | `/api/users` | public | Users and their post counts (no emails) |
+| GET | `/api/users/{id}/posts` | public | Images from one user |
+| GET | `/api/user` | token | The logged in user |
+| GET | `/api/my/posts` | token | My images |
+| POST | `/api/posts` | token | Publish (title, body, filter, image) |
+| PUT | `/api/posts/{id}` | token, owner/admin | Update |
+| DELETE | `/api/posts/{id}` | token, owner/admin | Delete |
+| POST | `/api/logout` | token | Delete the token |
+
+Filters: `none`, `grayscale`, `sepia`, `warm`, `cool`, `vivid`.
+
+---
+
+## Tests
+
+```bash
+npm test               # 40 Vitest unit tests for the gallery JavaScript
+npx playwright install # first time only, downloads the test browsers
+npx playwright test    # 37 Playwright acceptance tests (the app must be running)
+```
+
+- `tests/unit/` – validation and sanitising, the XHR wrapper, login state, card rendering
+- `tests/e2e/` – home, single post, user posts, register, login, logout, dashboard, profile, admin, gallery and API
+
+---
+
+## Project structure (main files)
+
+```
+app/Http/Controllers/        AuthController, PostController, DashboardController, ProfileController, GalleryController
+app/Http/Controllers/Admin/  AdminController, AdminUserController, AdminPostController
+app/Http/Controllers/Api/    AuthController, PostController (REST API)
+app/Http/Middleware/         AdminMiddleware, SanitizeInput
+app/Policies/PostPolicy.php
+resources/views/             Blade views (layout, auth, posts, users, admin, gallery)
+resources/js/gallery/        api.js, validation.js, state.js, render.js, main.js
+resources/sass/              abstracts (variables, mixins) and components (forms, tabs, filters, gallery)
+routes/web.php, routes/api.php
+tests/unit, tests/e2e
+database.sql
+```
+
+## Version control
+
+The project is in Git and on GitHub. `.gitignore` excludes `vendor/`, `node_modules/`, `.env`, `public/build`, `public/storage`, uploaded images and test output.

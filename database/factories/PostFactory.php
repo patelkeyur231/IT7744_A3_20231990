@@ -23,6 +23,7 @@ class PostFactory extends Factory
             'title' => fake()->sentence(6),
             'body' => fake()->paragraphs(4, true),
             'filter' => fake()->randomElement(Post::FILTERS),
+            'created_at' => fake()->dateTimeBetween('-3 weeks', '-1 hour'),
         ];
     }
 }

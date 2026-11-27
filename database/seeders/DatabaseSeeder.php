@@ -31,5 +31,8 @@ class DatabaseSeeder extends Seeder
 
         // dummy posts
         $this->call(PostSeeder::class);
+
+        // demo posts with real images
+        $this->call(DemoPostSeeder::class);
     }
 }
